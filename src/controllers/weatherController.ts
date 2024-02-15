@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import {
   generateDublinWeatherData,
   generateLondonWeatherData,
+  generateCyprusWeatherData,
+  generateChinaWeatherData,
 } from "../services/weatherService.js";
 
 /**
@@ -25,8 +27,14 @@ export const getWeatherData = async (req: Request, res: Response) => {
       finalWeatherData = generateLondonWeatherData();
     } else if (city === "dublin") {
       finalWeatherData = generateDublinWeatherData();
-    } else {
-      // If the city is not london or dublin, we will throw an error
+    }   else if (city === "cyprus") {
+        finalWeatherData = generateCyprusWeatherData();
+    }    else if (city === "china") {
+          finalWeatherData = generateChinaWeatherData();
+    } 
+    
+    else {
+      // If the city is not london, dublin, cyprus or china, we will throw an error
       res.status(404).send("City not found");
     }
 
